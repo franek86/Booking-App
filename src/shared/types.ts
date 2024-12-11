@@ -1,13 +1,5 @@
 import mongoose from "mongoose";
 
-export type UserTypes = {
-  _id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-};
-
 export interface IModelData {
   _id: mongoose.Types.ObjectId;
   name: string;
@@ -25,14 +17,6 @@ export interface IModelType {
   brandId: mongoose.Types.ObjectId;
   brandName: string;
 }
-
-export type CountryType = {
-  _id: string;
-  name: string;
-  shortCountryCode: string;
-  longCountryCode: string;
-  iconFlag?: string;
-};
 
 export type YachtType = {
   _id: string;

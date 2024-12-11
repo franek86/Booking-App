@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import { UserTypes } from "../shared/types";
 
-const userSchema = new mongoose.Schema({
+export interface IUser extends mongoose.Document {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}
+
+const userSchema = new mongoose.Schema<IUser>({
   firstname: { type: String, require: true },
   lastname: { type: String, require: true },
   email: { type: String, require: true, unique: true },
@@ -16,5 +22,5 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const UserModel = mongoose.model<UserTypes>("User", userSchema);
+const UserModel = mongoose.model<IUser>("User", userSchema);
 export default UserModel;

@@ -1,9 +1,7 @@
 import { Response, Request, NextFunction } from "express";
-import Country from "../models/Countries";
+import Country, { ICountryType } from "../models/Countries";
 import { errorHandler } from "../shared/error";
-import { CountryType } from "../shared/types";
 import { IPaginationType } from "../middleware/paginations";
-//import cloudinaryConfig from "../utils/cloudinaryConfig";
 
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
@@ -15,11 +13,11 @@ cloudinary.config({
 /*
  * Method: POST
  * Route: /countires/create
- * Protecded: Admin
+ * Protected: Admin
  */
 export const createCountry = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const newCountry = req.body as CountryType;
+    const newCountry = req.body as ICountryType;
     const existingCountry = await Country.findOne({ name: newCountry.name });
     if (existingCountry) return res.status(400).json({ message: "Country already exists." });
 
@@ -42,6 +40,7 @@ export const createCountry = async (req: Request, res: Response, next: NextFunct
 /*
  * Method: Get
  * Route: /countires
+ * Protected: Public
  * Query: ?sort=newest, oldest, name asceding, name descending
  */
 export const getCountries = async (req: IPaginationType, res: Response, next: NextFunction) => {
@@ -87,7 +86,7 @@ export const getCountries = async (req: IPaginationType, res: Response, next: Ne
 /*
  * Method: PATCH
  * Route: /:id
- * Protecded: Admin
+ * Protected: Admin
  * Required: country id
  */
 export const editCountry = async (req: Request, res: Response, next: NextFunction) => {
@@ -119,7 +118,7 @@ export const editCountry = async (req: Request, res: Response, next: NextFunctio
 /*
  * Method: DELETE
  * Route: /create
- * Protecded: Admin
+ * Protected: Admin
  * Required: country id
  */
 export const deleteCountry = async (req: Request, res: Response, next: NextFunction) => {
@@ -140,7 +139,7 @@ export const deleteCountry = async (req: Request, res: Response, next: NextFunct
 /*
  * Method: GET
  * Route: /:id
- * Protecded: Admin
+ * Protected: Admin
  * Required: country id
  */
 

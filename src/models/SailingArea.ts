@@ -1,6 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 
-const sailingAreaSchema = new mongoose.Schema(
+export interface ISailingArea extends mongoose.Document {
+  area: string;
+  countryIds: mongoose.Types.ObjectId[];
+}
+
+const sailingAreaSchema = new mongoose.Schema<ISailingArea>(
   {
     area: { type: String, require: true },
     countryIds: [
@@ -13,5 +18,5 @@ const sailingAreaSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const SailingArea = mongoose.model("SailingArea", sailingAreaSchema);
+const SailingArea = mongoose.model<ISailingArea>("SailingArea", sailingAreaSchema);
 export default SailingArea;

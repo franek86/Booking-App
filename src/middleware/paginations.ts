@@ -8,7 +8,7 @@ export interface IPaginationType extends Request {
   };
 }
 
-export const paginationMiddleware = (defaultPerPage: number = 12) => {
+export const paginationMiddleware = (defaultPerPage: number = 10) => {
   return (req: IPaginationType, res: Response, next: NextFunction) => {
     const page = parseInt((req.query.page as string) || "1");
     const perPage = parseInt((req.query.perPage as string) || defaultPerPage.toString());
